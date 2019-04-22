@@ -41,9 +41,11 @@ class Networking {
     func fetchTokenIfNeeded() -> Observable<String> {
         //check token if not expiry
         //return toke
-        if (true) {
-            return Observable.just("")
-        }
+
+//        if (true) {
+//            return Observable.just("")
+//        }
+        
         return fetchToken()
     }
     
