@@ -49,12 +49,25 @@ extension UserAPI: TargetType {
     }
     
     var task: Task {
-        return .requestPlain
+        
+        let requestParameters = parameters ?? [:]
+        let encoding: ParameterEncoding
+        
+        switch self {
+        case .fetchUsers,
+             .updateUser:
+            encoding = URLEncoding.queryString
+        }
+        
+        return .requestParameters(parameters: requestParameters, encoding: encoding)
     }
     
     var headers: [String : String]? {
         return nil
     }
     
-    
+    var parameters: [String: Any]? {
+        
+        return nil
+    }
 }
