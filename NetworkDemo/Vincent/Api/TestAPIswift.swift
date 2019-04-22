@@ -57,12 +57,9 @@ extension UserAPI: TargetType {
         }
     }
     var task: Task {
-        switch self {
-        case .fetchUsers:
-            return .requestPlain
-        case .updateUser:
-            return .requestParameters(parameters: parameters!, encoding: JSONEncoding.default)
-        }
+        let requestParameters = parameters ?? [:]
+    
+        return .requestParameters(parameters: requestParameters, encoding: JSONEncoding.default)
     }
     
     var headers: [String : String]? {
@@ -70,5 +67,5 @@ extension UserAPI: TargetType {
         return nil
     }
     
-    
+   
 }
