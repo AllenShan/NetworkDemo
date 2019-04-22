@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import RxSwift
+import Moya
 
 class ViewController: UIViewController {
 
+    var disposed = DisposeBag()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        
+        let target = MultiTarget(UserAPI.fetchUsers)
+        Networking.shared.request(multiTarget: target, type: User.self)
+            .subscribe(onNext: { (user) in
+                
+            })
+            .disposed(by: disposed)
+        
     }
 
 
