@@ -19,11 +19,12 @@ class ViewController: UIViewController {
         
         
         let target = MultiTarget(UserAPI.fetchUsers)
-        let fetchUser: Observable<User> = Networking.shared.request(multiTarget: target)
-        fetchUser
+
+        Networking.shared.request(multiTarget: target, type: User.self)
             .subscribe(onNext: { (user) in
                 
-            }).disposed(by: disposed)
+            })
+            .disposed(by: disposed)
         
     }
 

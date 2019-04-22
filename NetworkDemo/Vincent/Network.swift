@@ -44,7 +44,6 @@ class Networking {
         if (true) {
             return Observable.just("")
         }
-        
         return fetchToken()
     }
     
@@ -57,9 +56,9 @@ class Networking {
             })
     }
     
-    func request<Model: Codable>(multiTarget: MultiTarget, atKeyPath keyPath: String? = nil) -> Observable<Model> {
-        
-        let request = provider.request(target: multiTarget).map(Model.self, atKeyPath: keyPath)
+
+    func request<Model: Codable>(multiTarget: MultiTarget, type: Model.Type,  atKeyPath keyPath: String? = nil) -> Observable<Model> {
+        let request = provider.request(target: multiTarget).map(type.self, atKeyPath: keyPath)
         return fetchTokenIfNeeded()
             .flatMap({ (token) -> Observable<Model> in
                 return request

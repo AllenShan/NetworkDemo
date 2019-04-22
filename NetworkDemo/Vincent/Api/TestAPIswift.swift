@@ -11,9 +11,9 @@ import Moya
 
 #if DEBUG
 //    let serverIp = "https://master.handsup.dev/"
-let serverIp = "https://pro"
-#else
 let serverIp = "https://dev"
+#else
+let serverIp = "https://pro"
 #endif
 
 enum UserAPI {
