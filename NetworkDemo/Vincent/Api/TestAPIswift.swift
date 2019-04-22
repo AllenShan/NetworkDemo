@@ -17,7 +17,7 @@ let serverIp = "https://pro"
 
 enum UserAPI {
     case fetchUsers
-    case updateUser
+    case updateUser(name: String)
 }
 
 extension UserAPI: TargetType {
@@ -37,9 +37,10 @@ extension UserAPI: TargetType {
     
     var method: Moya.Method {
         switch self {
-        case .fetchUsers,
-             .updateUser:
+        case .fetchUsers:
             return .get
+        case .updateUser:
+            return .post
         }
 
     }
@@ -47,12 +48,25 @@ extension UserAPI: TargetType {
     var sampleData: Data {
         return Data.init()
     }
-    
+    var parameters : [String: Any]? {
+        switch self {
+        case .fetchUsers:
+            return nil
+        case .updateUser(let name):
+            return ["name": name]
+        }
+    }
     var task: Task {
-        return .requestPlain
+        switch self {
+        case .fetchUsers:
+            return .requestPlain
+        case .updateUser:
+            return .requestParameters(parameters: parameters!, encoding: JSONEncoding.default)
+        }
     }
     
     var headers: [String : String]? {
+        
         return nil
     }
     

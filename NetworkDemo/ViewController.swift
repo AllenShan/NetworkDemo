@@ -18,9 +18,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         
-        let target = MultiTarget(UserAPI.fetchUsers)
+        let fetchTarget = MultiTarget(UserAPI.fetchUsers)
 
-        Networking.shared.request(multiTarget: target, type: User.self)
+        Networking.shared.request(multiTarget: fetchTarget, type: User.self)
+            .subscribe(onNext: { (user) in
+                
+            })
+            .disposed(by: disposed)
+        
+        let updateTarget = MultiTarget(UserAPI.updateUser(name: "Allen"))
+
+        Networking.shared.request(multiTarget: updateTarget, type: User.self)
             .subscribe(onNext: { (user) in
                 
             })
