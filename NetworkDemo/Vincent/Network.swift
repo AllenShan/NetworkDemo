@@ -41,6 +41,7 @@ class Networking {
     func fetchTokenIfNeeded() -> Observable<String> {
         //check token if not expiry
         //return toke
+
 //        if (true) {
 //            return Observable.just("")
 //        }
@@ -57,8 +58,8 @@ class Networking {
             })
     }
     
+
     func request<Model: Codable>(multiTarget: MultiTarget, type: Model.Type,  atKeyPath keyPath: String? = nil) -> Observable<Model> {
-        
         let request = provider.request(target: multiTarget).map(type.self, atKeyPath: keyPath)
         return fetchTokenIfNeeded()
             .flatMap({ (token) -> Observable<Model> in

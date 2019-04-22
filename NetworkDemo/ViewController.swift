@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         
         
         let target = MultiTarget(UserAPI.fetchUsers)
+
         Networking.shared.request(multiTarget: target, type: User.self)
             .subscribe(onNext: { (user) in
                 
