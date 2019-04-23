@@ -10,4 +10,6 @@ import Foundation
 
 struct User: Codable {
     var name: String
+    var mobile: Int
+    var id: Int
 }
